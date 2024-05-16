@@ -9,7 +9,7 @@ const ListMovies = ({ movies }) => {
         <FlatList
             data={movies}
             keyExtractor={(movie) => movie.id.toString()} // Ensure the key is a string
-            renderItem={({ item }) => <MovieCard movie={item} />}
+            renderItem={({ item }) => <View style={styles.cardContainer} ><MovieCard movie={item} /></View>}
             numColumns={2} // Display items in 2 columns (change as needed)
             contentContainerStyle={styles.container} // Add container style
         />
@@ -19,8 +19,13 @@ const ListMovies = ({ movies }) => {
 const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
-        paddingHorizontal: 5, 
+        paddingHorizontal: 5,
         backgroundColor: 'black',
+    },
+    cardContainer: {
+        width: '45%',
+        marginHorizontal:'auto', // Adjust the width as needed to fit two cards in a row
+        marginBottom: 10,
     },
 });
 

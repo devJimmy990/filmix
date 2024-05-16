@@ -1,20 +1,21 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import StackRoutes from './routes/stack';
+import { QueryClientProvider } from 'react-query';
+import { queryClient } from './controllers/react.query';
+import DrawerRoutes from './routes/drawer';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    // <View>
+    //   <Text>dfsd</Text>
+    // </View>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <StackRoutes />
+        {/* <DrawerRoutes/> */}
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

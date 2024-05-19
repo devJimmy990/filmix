@@ -1,19 +1,28 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import routes from '../utils/routes';
 import HomePage from '../pages/home';
-import FavouritePage from '../pages/favourite';
 import LoginPage from '../pages/login';
+import { Ionicons } from '@expo/vector-icons';
+import FavouritePage from '../pages/favourite';
 import IconWithBadge from '../components/icon.badge';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useSelector } from 'react-redux';
+
+
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomRoutes() {
+    const { isLogged } = useSelector(state => state.user.user)
+    const Tabs = [
+        { title: 'Home', component: HomePage, route: routes.HOME },
+        { title: 'Favourite', component: FavouritePage, route: routes.FAVOURITES },
+        { title: 'Profile', component: isLogged ? FavouritePage : LoginPage, route: routes.PROFILE },
+    ];
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
-                tabBarIcon: ({ color, size }) => {
+                tabBarIcon: ({ color, size, focused }) => {
                     let iconName;
                     switch (route.name) {
                         case routes.HOME:
@@ -21,7 +30,6 @@ export default function BottomRoutes() {
                             break;
                         case routes.FAVOURITES:
                             iconName = 'heart';
-                            badgeCount = 5; // Example badge count
                             break;
                         case routes.PROFILE:
                             iconName = 'person';
@@ -31,21 +39,34 @@ export default function BottomRoutes() {
                     }
 
                     return route.name === routes.FAVOURITES ? (
-                        <IconWithBadge name={iconName} color={color} size={size} />
+                        <IconWithBadge name={iconName} color={color} size={size} focused={focused} />
                     ) : (
                         <Ionicons name={iconName} size={size} color={color} />
                     );
                 },
-            })}
-            tabBarOptions={{
-                style: { backgroundColor: 'red' }, // Set background color of tab bar
-                activeTintColor: 'red', // Set color for active tab
-                inactiveTintColor: 'gray', // Set color for inactive tab
-            }}
+                headerShown: false,
+                tabBarStyle: {
+                    left: 0,
+                    right: 0,
+                    borderTopWidth: 0,
+                    position: 'absolute',
+                    shadowColor: 'transparent',
+                    backgroundColor: 'rgba(0,0,0,0.7)',
+                },
+                tabBarActiveTintColor: 'yellow',
+                tabBarInactiveTintColor: 'gray',
+            })
+            }
         >
-            <Tab.Screen name={routes.HOME} component={HomePage} options={{ headerShown: false, title: "Home" }} />
-            <Tab.Screen name={routes.FAVOURITES} component={FavouritePage} options={{ headerShown: false, title: "Favourite" }} />
-            <Tab.Screen name={routes.PROFILE} component={LoginPage} options={{ headerShown: false, title: "Profile" }} />
+            {Tabs.map((tab) => (
+                <Tab.Screen
+                    key={tab.title}
+                    name={tab.route}
+                    component={tab.component}
+                    // options={{ title: '' }}
+                    options={{ title: tab.title }}
+                />
+            ))}
         </Tab.Navigator>
     );
 }

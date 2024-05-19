@@ -23,19 +23,20 @@ export default function SearchInput({ search, handleSearchInput }) {
 
     const inputWidth = animatedValue.interpolate({
         inputRange: [0, 1],
-        outputRange: ['40%', '80%'], // Adjust the width values as needed
+        outputRange: ['65%', '100%'], 
     });
 
     return (
         <Animated.View style={[styles.container, { width: inputWidth }]}>
-            <Ionicons name="search" size={24} color="#aaa" style={styles.icon} />
+            <Ionicons name="search" size={24} style={styles.icon} />
             <TextInput
-                placeholder="Search..."
                 value={search}
-                onChangeText={handleSearchInput}
-                onFocus={handleFocus}
                 onBlur={handleBlur}
                 style={styles.input}
+                onFocus={handleFocus}
+                placeholder="Search..."
+                placeholderTextColor={'white'}
+                onChangeText={handleSearchInput}
             />
         </Animated.View>
     );
@@ -43,25 +44,24 @@ export default function SearchInput({ search, handleSearchInput }) {
 
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
+        height: 40,
+        opacity: 0.6,
+        elevation: 5,
+        borderRadius: 20,
+        paddingLeft: 10,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: 'black',
-        opacity: 0.6,
-        borderRadius: 20,
-        paddingHorizontal: 20,
-        elevation: 5,
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
     },
     icon: {
         marginRight: 10,
         color: 'white',
     },
     input: {
-        flex: 1,
+        // flex: 1,
         fontSize: 16,
         color: 'white',
-        paddingVertical: 10,
+        // paddingVertical: 10,
+
     },
 });

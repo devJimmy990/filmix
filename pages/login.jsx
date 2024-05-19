@@ -1,36 +1,17 @@
-
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, ImageBackground, Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import routes from '../utils/routes';
-import AnimatedWelcomeMessage from '../components/text/animated.welcome';
-import BtnSignOption from '../components/button/options.sign';
-import InputField from '../components/input.field';
-import CreateNewAccount from '../components/text/login.createnew';
+import sources from '../utils/sources';
+import React, { useEffect } from 'react';
 import LoginForm from '../components/form/login';
+import { View, StyleSheet, ImageBackground } from 'react-native';
+import CreateNewAccount from '../components/text/auth.footer_link';
+import AnimatedWelcomeMessage from '../components/text/animated.welcome';
 
-const LoginPage = () => {
-    const { navigate } = useNavigation();
-
-
-    const handleSignIn = () => {
-        // Handle sign-in logic
-    };
-
-    const handleGoogleSignIn = () => {
-        // Handle Google sign-in logic
-    };
-
-    const handleGithubSignIn = () => {
-        // Handle GitHub sign-in logic
-    };
-
+export default function LoginPage() {
+   
     return (
         <ImageBackground
-            source={{ uri: 'https://source.unsplash.com/random/?cinema' }}
+            source={{ uri: sources.SPLASH }}
             style={styles.background}
-            blurRadius={5} 
+            blurRadius={5}
         >
             <View style={styles.container}>
                 <AnimatedWelcomeMessage />
@@ -44,7 +25,7 @@ const LoginPage = () => {
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        resizeMode: 'cover', // Cover the entire screen
+        resizeMode: 'cover',
         justifyContent: 'center',
     },
     container: {
@@ -55,4 +36,3 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LoginPage;

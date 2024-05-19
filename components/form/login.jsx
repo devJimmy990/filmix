@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { View } from "react-native";
 import AuthOptions from "./options";
-import InputField from "../input.field";
 import OrOptions from "../text/or.options";
 import BtnAuthAction from "../button/auth.action";
+import PasswordInputField from "../input/password.input";
+import EmailInputField from "../input/email.input";
+import Spacer from "../free_space";
+import useSignIn from "../../hooks/auth/use.signin";
+import ShowToast from "../../utils/toast";
+import { useNavigation } from "@react-navigation/native";
+import routes from "../../utils/routes";
+import ErrorHandler from "../../utils/error.handler";
 
 export default function LoginForm() {
     return (
@@ -16,28 +23,41 @@ export default function LoginForm() {
 }
 
 const LoginInputs = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const { navigate } = useNavigation();
+    const [user, setUser] = useState({ email: "", password: "" })
+    const { loading, error, signInWithEmail } = useSignIn(); // Use the custom hook
 
-    const handleSignIn = () => {
+    const onTextChange = (name, res) =>
+        setUser({ ...user, [name]: res })
 
-    }
+    const resetUser = () => setUser({ email: "", password: "" })
+    const handleSignIn = async () => {
+        try {
+            const userCredential = await signInWithEmail(user.email, user.password);
+            ShowToast('User signed in successfully');
+            setTimeout(() => {
+                resetUser();
+                navigate(routes.HOME);
+            }, 2000);
+        } catch (error) { ShowToast(ErrorHandler.login(error)); }
+    };
+
     return (
         <View style={{ width: '100%' }}>
-            <InputField
+            <EmailInputField
+                name="email"
                 placeholder="Email"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
+                value={user.email}
+                onChangeText={onTextChange}
             />
 
-            <InputField
+            <PasswordInputField
+                name="password"
+                value={user.password}
                 placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                keyboardType="text"
-                isPassword={true}
+                onChangeText={onTextChange}
             />
+            <Spacer height={10} />
             <BtnAuthAction value="Sign In" onPress={handleSignIn} />
         </View>
     );

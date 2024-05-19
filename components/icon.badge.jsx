@@ -4,15 +4,16 @@ import { Ionicons } from '@expo/vector-icons';
 import { Badge } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 
-const IconWithBadge = ({ name, color, size }) => {
+const IconWithBadge = ({ name, color, size, focused }) => {
     const length = useSelector(state => state.favourite.favourites.length);
+
     return (
         <View style={{ width: 24, height: 24, margin: 5 }}>
             <Ionicons name={name} size={size} color={color} />
-            {length > 0 && (
+            {0 < length && (
                 <Badge
-                    size={12}
-                    style={styles.badge}
+                    size={14}
+                    style={[styles.badge, { backgroundColor: focused ? 'gray' : 'yellow', color: 'black', fontSize: 12, fontWeight: 'bold' }]}
                 >
                     {length}
                 </Badge>
@@ -26,7 +27,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: -4,
         right: -4,
-        backgroundColor: 'red', // Customize badge color if needed
     },
 });
 

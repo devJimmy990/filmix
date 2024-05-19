@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     orContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 20,
+        marginBottom: 5,
     },
     line: {
         flex: 1,

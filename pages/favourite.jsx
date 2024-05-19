@@ -1,8 +1,10 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { useSelector } from 'react-redux';
-import MovieCard from '../components/card.movie';
+import MovieCard from '../components/card/card.movie';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import sources from '../utils/sources';
+import { StatusBar } from 'expo-status-bar';
 
 export default function FavouritePage() {
     const movies = useSelector(state => state.favourite.favourites);
@@ -12,9 +14,10 @@ export default function FavouritePage() {
             {movies.length === 0 && <Text style={styles.noMoviesText}>No movies in favourites</Text>}
             {movies.length > 0 && (
                 <View style={{ flex: 1 }}>
+                    <StatusBar style="light" backgroundColor='transparent' />
                     <View style={styles.backgroundImageContainer}>
                         <Image
-                            source={{ uri: "https://th.bing.com/th/id/R.c491ca7e121176716a7f74d0c7655db9?rik=rjv4EABN7DupUQ&riu=http%3a%2f%2fgiphygifs.s3.amazonaws.com%2fmedia%2fd9wPasV7ukkta%2fgiphy.gif&ehk=NgYUNKK%2b2IC4VuOJz72PGfDcMGi%2frRs6EQvOFtlwvQo%3d&risl=&pid=ImgRaw&r=0" }}
+                            source={{ uri: sources.HOME_GIF }}
                             style={styles.image}
                         />
                     </View>

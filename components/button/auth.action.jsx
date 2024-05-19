@@ -1,24 +1,32 @@
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+    Text,
+    StyleSheet,
+    TouchableOpacity
+} from "react-native";
+
 
 export default function BtnAuthAction({ value, onPress }) {
-
     return (
-        <TouchableOpacity style={styles.signInButton} onPress={onPress}>
-            <Text style={styles.signInButtonText}>{value}</Text>
+        <TouchableOpacity
+            style={styles.btn}
+            onPress={onPress}>
+            <Text style={styles.title}> {value} </Text>
         </TouchableOpacity>
     );
 }
+
 const styles = StyleSheet.create({
-    signInButton: {
-        width: '100%',
-        backgroundColor: '#3498db',
+    btn: {
+        width: '60%',
         borderRadius: 25,
-        justifyContent: 'center',
-        alignItems: 'center',
+        marginBottom: 10,
         paddingVertical: 12,
-        marginBottom: 20,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#3498db',
     },
-    signInButtonText: {
+    title: {
         color: 'white',
         fontSize: 16,
         fontWeight: 'bold',

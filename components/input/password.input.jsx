@@ -2,18 +2,16 @@ import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 
-
-
-export default PasswordInputField = ({
+export default function PasswordInputField({
     value,
     name,
     placeholder,
     onChangeText,
-    isShown = true,
+    isShown = false,
     isExternal = false,
-}) => {
+}) {
     const [showPassword, setShowPassword] = useState(isExternal ? isShown : false);
-
+    // console.warn(isExternal, isShown);
     return (
         <TextInput
             value={value}
@@ -22,20 +20,19 @@ export default PasswordInputField = ({
             placeholder={placeholder}
             secureTextEntry={isExternal ? isShown : !showPassword}
             underlineStyle={{ display: 'none' }}
-            onChangeText={(res) => onChangeText(name, res)}
+            onChangeText={(text) => onChangeText(name, text)}
             right={!isExternal &&
                 <TextInput.Icon style={{ marginHorizontal: 0, paddingHorizontal: 0 }}
                     onPress={() => setShowPassword(!showPassword)}
-                    icon={isExternal ?
-                        (isShown ? "eye-off" : "eye")
-                        : (showPassword ? "eye-off" : "eye")
-                    } />}
+                    icon={showPassword ? "eye-off" : "eye"}
+                // (isShown ? "eye-off" : "eye")
+                // : (showPassword ? "eye-off" : "eye")
+                />}
         />
     );
 }
 
 const styles = StyleSheet.create({
-
     input: {
         borderRadius: 18,
         marginVertical: 1.25,

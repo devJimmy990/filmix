@@ -4,6 +4,7 @@ import { getAuth } from 'firebase/auth';
 import FIREBASE from './firebase.config';
 import { useDispatch } from 'react-redux';
 import { resetUserData } from '../../controllers/redux/slices/user';
+import { clearFavourite } from '../../controllers/redux/slices/favourite';
 
 const useSignOut = () => {
     const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const useSignOut = () => {
         try {
             await getAuth(FIREBASE).signOut();
             dispatch(resetUserData());
+            dispatch(clearFavourite());
         } catch (error) {
         }
     };

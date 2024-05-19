@@ -14,6 +14,9 @@ export const favouriteSlice = createSlice({
                 (favourite) => favourite.id !== action.payload
             );
         },
+        clearFavourite: (state, action) => {
+            state.favourites = [];
+        },
         toggleFavourite: (state, action) => {
             if (state.favourites.length === 0)
                 state.favourites.push(action.payload);
@@ -30,4 +33,4 @@ export const favouriteSlice = createSlice({
 
 
 export default favouriteSlice.reducer
-export const { addFavourite, removeFavourite, toggleFavourite } = favouriteSlice.actions
+export const { addFavourite, removeFavourite, toggleFavourite, clearFavourite } = favouriteSlice.actions

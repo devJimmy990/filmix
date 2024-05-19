@@ -43,14 +43,10 @@ const SignupInputs = () => {
     const handleBtnPressed = async () => {
         try {
             setLoading(true);
-            const res = await useCreateUser(
+            await useCreateUser(
                 user.email,
                 pass.password
             );
-            // await addNewUser({
-            //     uid: res.user.uid,
-            //     ...user
-            // });
             dispatch(setUserData({ ...user }));
             navigate(routes.HOME);
         } catch (error) { ShowToast(ErrorHandler.signup(error)); }
@@ -127,7 +123,4 @@ const SignupInputs = () => {
     );
 };
 
-const styles = StyleSheet.create({
-
-});
 

@@ -10,7 +10,6 @@ const useSignOut = () => {
 
     const signOut = async () => {
         try {
-            setSignOutLoading(true);
             await getAuth(FIREBASE).signOut();
             dispatch(resetUserData());
         } catch (error) {

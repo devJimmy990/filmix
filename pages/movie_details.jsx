@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.5)',
     },
     card: {
-        // margin: 10,
+        marginHorizontal: 10,
         backgroundColor: 'rgba(18, 18, 18, 0.4)',
         // backgroundColor: 'white',
         paddingVertical: 10,

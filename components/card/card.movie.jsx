@@ -19,6 +19,8 @@ const MovieCard = ({ movie }) => {
 const styles = StyleSheet.create({
     card: {
         margin: 10,
+        minWidth: 120,
+        marginHorizontal: 'auto',
         width: '100%',
         elevation: 5,
         borderRadius: 10,
@@ -28,7 +30,6 @@ const styles = StyleSheet.create({
     image: {
         height: 200,
         width: '100%',
-        minWidth: 150,
         borderRadius: 10,
     },
     favoriteButton: {

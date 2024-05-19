@@ -80,12 +80,15 @@ export default function HomePage() {
                 contentContainerStyle={styles.scrollViewContent}
                 onScroll={handleAnimation}
                 scrollEventThrottle={16}
+                // style={{ backgroundColor: 'red', }}
             >
                 {isLoading && <Text>Loading...</Text>}
                 {error && <Text>Error Happened...</Text>}
                 {!isLoading && !error && <ListMovies movies={data.filter(movie =>
                     movie.title.toLowerCase().includes(search.toLowerCase()))} />}
             </Animated.ScrollView>
+
+
         </View>
     );
 }
@@ -132,5 +135,9 @@ const styles = StyleSheet.create({
     },
     scrollViewContent: {
         paddingTop: 250, // Adjust based on the height of the popular list and search container
+        justifyContent: 'center',
+        // alignContent: 'center',
+        alignItems: 'center',
+        // paddingHorizontal: '2.5%',
     },
 });

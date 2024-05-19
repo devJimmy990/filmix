@@ -51,7 +51,7 @@ const SignupInputs = () => {
             //     uid: res.user.uid,
             //     ...user
             // });
-            dispatch(setUserData({ uid: res.user.uid, ...user }));
+            dispatch(setUserData({ ...user }));
             navigate(routes.HOME);
         } catch (error) { ShowToast(ErrorHandler.signup(error)); }
         finally { setLoading(false); }

@@ -4,7 +4,6 @@ export const userSlice = createSlice({
     name: "user",
     initialState: {
         user: {
-            uid: "",
             fName: "",
             lName: "",
             email: "",
@@ -16,12 +15,7 @@ export const userSlice = createSlice({
     reducers: {
         setUserData: (state, action) => {
             state.user = {
-                uid: "",
-                fName: "Muhammed",
-                lName: "Gamal",
-                email: "jimmy99r@gmail.com",
-                phone: "01289223643",
-                age: 25,
+                ...action.payload,
                 isLogged: true
             }
         },

@@ -33,7 +33,7 @@ const LoginInputs = () => {
     const resetUser = () => setUser({ email: "", password: "" })
     const handleSignIn = async () => {
         try {
-            const userCredential = await signInWithEmail(user.email, user.password);
+            await signInWithEmail(user.email, user.password);
             ShowToast('User signed in successfully');
             setTimeout(() => {
                 resetUser();

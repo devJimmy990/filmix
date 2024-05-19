@@ -7,6 +7,7 @@ import FavouritePage from '../pages/favourite';
 import IconWithBadge from '../components/icon.badge';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSelector } from 'react-redux';
+import ProfilePage from '../pages/profile';
 
 
 
@@ -17,7 +18,7 @@ export default function BottomRoutes() {
     const Tabs = [
         { title: 'Home', component: HomePage, route: routes.HOME },
         { title: 'Favourite', component: FavouritePage, route: routes.FAVOURITES },
-        { title: 'Profile', component: isLogged ? FavouritePage : LoginPage, route: routes.PROFILE },
+        { title: 'Profile', component: isLogged ? ProfilePage : LoginPage, route: routes.PROFILE },
     ];
     return (
         <Tab.Navigator

@@ -11,4 +11,4 @@ const useCreateUserWithEmailAndPassword = async (email, pass) => {
         throw error;
     }
 }
-export { useCreateUserWithEmailAndPassword };
+export { useCreateUserWithEmailAndPassword as useCreateUser };

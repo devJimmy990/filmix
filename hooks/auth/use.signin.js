@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import useLoadUser from '../admin/user.load';
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../../controllers/redux/slices/user';
 
 const useSignIn = () => {
+    // const { loadUserData } = useLoadUser();
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [user, setUser] = useState(null);
@@ -13,6 +18,7 @@ const useSignIn = () => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
+            dispatch(setUserData());
             setUser(user);
             setLoading(false);
             setError(null);

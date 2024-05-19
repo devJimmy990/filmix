@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 
-export default function EmailInputField({
+export default EmailInputField = ({
     value, name,
     placeholder,
     onChangeText,
-}) {
+}) => {
 
     return (
         <TextInput

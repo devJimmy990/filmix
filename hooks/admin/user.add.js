@@ -1,17 +1,10 @@
-// import firestore from '@react-native-firebase/firestore';
-// export default async function useSaveUserData(user) {
-//     await firestore()
-//         .collection('users')
-//         .doc(user.uid).set({ ...user.remove('uid') });
-// }
-
-
+// hooks.js
 import { useState } from 'react';
-import FIREBASE from './firebase.config';
 import { getFirestore, collection, addDoc } from "firebase/firestore/lite";
+import FIREBASE from '../auth/firebase.config';
 
+// Hook for adding a new user
 const useAddNewUser = () => {
-
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -28,7 +21,4 @@ const useAddNewUser = () => {
 
     return { addNewUser, loading, error };
 }
-
 export default useAddNewUser;
-
-

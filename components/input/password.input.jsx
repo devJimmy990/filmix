@@ -4,14 +4,14 @@ import { TextInput } from "react-native-paper";
 
 
 
-export default function PasswordInputField({
+export default PasswordInputField = ({
     value,
     name,
     placeholder,
     onChangeText,
     isShown = true,
     isExternal = false,
-}) {
+}) => {
     const [showPassword, setShowPassword] = useState(isExternal ? isShown : false);
 
     return (
@@ -26,7 +26,10 @@ export default function PasswordInputField({
             right={!isExternal &&
                 <TextInput.Icon style={{ marginHorizontal: 0, paddingHorizontal: 0 }}
                     onPress={() => setShowPassword(!showPassword)}
-                    icon={isExternal ? isShown ? "eye-off" : "eye" : showPassword ? "eye-off" : "eye"} />}
+                    icon={isExternal ?
+                        (isShown ? "eye-off" : "eye")
+                        : (showPassword ? "eye-off" : "eye")
+                    } />}
         />
     );
 }

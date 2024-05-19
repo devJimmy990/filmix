@@ -1,21 +1,22 @@
 import { useState } from "react";
-import { Pressable, StyleSheet, ToastAndroid, TouchableOpacity, TouchableOpacityBase, View } from "react-native";
-import AuthOptions from "./options";
-import TextInputField from "../input/text.input";
-import OrOptions from "../text/or.options";
-import BtnAuthAction from "../button/auth.action";
-import PasswordInputField from "../input/password.input";
-import NumberInputField from "../input/number.input";
-import EmailInputField from "../input/email.input";
-import { Ionicons } from '@expo/vector-icons';
 import Spacer from "../free_space";
-import { useCreateUserWithEmailAndPassword } from "../../hooks/auth/use.signup";
-import useAddNewUser from "../../hooks/auth/use.user";
+import AuthOptions from "./options";
 import ShowToast from "../../utils/toast";
+import OrOptions from "../text/or.options";
+import { Ionicons } from '@expo/vector-icons';
+import TextInputField from "../input/text.input";
+import BtnAuthAction from "../button/auth.action";
+import EmailInputField from "../input/email.input";
+import NumberInputField from "../input/number.input";
 import ErrorHandler from "../../utils/error.handler";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../../controllers/redux/slices/user";
-// import useSaveUserData from "../../hooks/auth/use.user";
+import PasswordInputField from "../input/password.input";
+import useAddNewUser from "../../hooks/admin/user.add";
+import { setUser, setUserData } from "../../controllers/redux/slices/user";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { useCreateUser } from "../../hooks/auth/use.signup";
+import { useNavigation } from "@react-navigation/native";
+import routes from "../../utils/routes";
 
 export default function SignupForm() {
     return (
@@ -29,28 +30,30 @@ export default function SignupForm() {
 
 const SignupInputs = () => {
     const dispatch = useDispatch();
+    const { navigate } = useNavigation();
     const [isLoading, setLoading] = useState(false);
     const { addNewUser, loading, error } = useAddNewUser()
     const [showPassword, setShowPassword] = useState(false);
     const [pass, setPass] = useState({ password: "", re_Password: "" });
-    const [user, setUserData] = useState({ fName: "", lName: "", phone: "", age: 0, email: "" });
+    const [user, setUser] = useState({ fName: "", lName: "", phone: "", age: 0, email: "" });
 
     const onPasswordChange = (name, res) => setPass({ ...pass, [name]: res })
-    const onTextChange = (name, res) => setUserData({ ...user, [name]: res })
+    const onTextChange = (name, res) => setUser({ ...user, [name]: res })
 
     const handleBtnPressed = async () => {
         try {
             setLoading(true);
-            const res = await useCreateUserWithEmailAndPassword(
+            const res = await useCreateUser(
                 user.email,
                 pass.password
             );
-            await addNewUser({
-                uid: res.user.uid,
-                ...user
-            });
-            dispatch(setUser({ uid: res.user.uid, ...user }));
-        } catch (error) { ShowToast(ErrorHandler.login(error)); }
+            // await addNewUser({
+            //     uid: res.user.uid,
+            //     ...user
+            // });
+            dispatch(setUserData({ uid: res.user.uid, ...user }));
+            navigate(routes.HOME);
+        } catch (error) { ShowToast(ErrorHandler.signup(error)); }
         finally { setLoading(false); }
     };
 

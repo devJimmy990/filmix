@@ -14,10 +14,18 @@ export const userSlice = createSlice({
         },
     },
     reducers: {
-        setUser: (state, action) => {
-            state.user = { ...action.payload, isLogged: true }
+        setUserData: (state, action) => {
+            state.user = {
+                uid: "",
+                fName: "Muhammed",
+                lName: "Gamal",
+                email: "jimmy99r@gmail.com",
+                phone: "01289223643",
+                age: 25,
+                isLogged: true
+            }
         },
-        resetUser: (state, action) => {
+        resetUserData: (state, action) => {
             state.user = {
                 uid: "",
                 name: "",
@@ -25,7 +33,6 @@ export const userSlice = createSlice({
                 phone: "",
                 age: 0,
                 isLogged: false
-
             };
         },
     }
@@ -33,4 +40,4 @@ export const userSlice = createSlice({
 
 
 export default userSlice.reducer
-export const { setUser, resetUser } = userSlice.actions
+export const { setUserData, resetUserData } = userSlice.actions

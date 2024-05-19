@@ -1,4 +1,5 @@
 export default sources = Object.freeze({
+    PROFILE: require("../assets/profile.png"),
     POSTER: "https://image.tmdb.org/t/p/w500/",
     BACK_DROP: "https://image.tmdb.org/t/p/w780",
     SPLASH: "https://source.unsplash.com/random/?cinema",

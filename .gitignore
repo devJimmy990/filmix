@@ -34,4 +34,4 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-./hooks/auth/firebase.config.js
+hooks/auth/firebase.config.js
